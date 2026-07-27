@@ -35,9 +35,9 @@ describe('Test Order', () => {
         <Order />
       </OrderContext.Provider>
     );
-    //Assert: replace the return true.
+    //Assert: exactly one $2.50 on the page after async delivery fee load
     await waitFor(() => {
-      return true;
+      expect(screen.getAllByText('$2.50')).toHaveLength(1);
     });
   });
 
@@ -61,9 +61,9 @@ describe('Test Order', () => {
       // Find and select the 5 mile option, like a real user would.
       screen.getByRole('option', { name: '5 miles' })
     );
-    //Assert: replace the return true.
+    //Assert: fee updates for the new distance
     await waitFor(() => {
-      return true;
+      expect(screen.getAllByText('$5.00')).toHaveLength(1);
     });
   });
 });
